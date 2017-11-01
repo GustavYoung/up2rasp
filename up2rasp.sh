@@ -77,11 +77,11 @@ select opt in "${options[@]}" "Salir"; do
         node uxm-upgrade.js
     ;;
     3 ) echo "Haz seleccionado $opt ejecutara $REPLY"
-            echo "Ten encuenta que el proceso es demasiado largo.";
+            echo "Ten en cuenta que el proceso es demasiado largo.";
             echo "lo ideal es realizar primero un paso y luego el otro :S.";
             echo "tienes 20 seg para dar CTRL+C y cancelar el proceso;";
             sleep 21;
-            echo "Updating Tunel and al the other Shit";
+            echo "Updating Tunel and all the other Shit";
             # --- processing-------------------------------------------
             #
             #sudo apt-get update && sudo apt-get upgrade -y;
