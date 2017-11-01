@@ -145,7 +145,6 @@ select opt in "${options[@]}" "Salir"; do
     
     ;;
     4 ) echo "Actualizar sistema de la rasp."
-            ${NORMAL};
             echo "Actualizando repos";
             sudo apt-get update;
             echo "Instalando packs";
