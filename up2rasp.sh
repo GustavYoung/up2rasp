@@ -79,8 +79,8 @@ select opt in "${options[@]}" "Salir"; do
     3 ) echo "Haz seleccionado $opt ejecutara $REPLY"
             echo "Ten en cuenta que el proceso es demasiado largo.";
             echo "lo ideal es realizar primero un paso y luego el otro :S.";
-            echo "tienes 20 seg para dar CTRL+C y cancelar el proceso;";
-            sleep 21;
+            echo "tienes 10 seg para dar CTRL+C y cancelar el proceso;";
+            sleep 11;
             echo "Updating Tunel and all the other Shit";
             # --- processing-------------------------------------------
             #
@@ -149,20 +149,42 @@ select opt in "${options[@]}" "Salir"; do
             sudo apt-get update;
             echo "Instalando packs";
             sudo apt-get upgrade -y;
+            clear
+            echo " 1) Migracion Tunel" 
+            echo " 2) Instalar APP Uxmal v2" 
+            echo " 3) Todo Junto" 
+            echo " 4) Actualizar" 
+            echo " 5) Instalar systemd"
     ;;
     5 ) echo "Instalar systemd."
             echo "Agregando repos de jessie ";
-            touch /etc/apt/preferences.d/jessie.pref
-            touch /etc/apt/preferences.d/jessie.list
-            echo "Package: *" >> /etc/apt/preferences.d/jessie.pref;
-            echo "Pin: release n=jessie" >> /etc/apt/preferences.d/jessie.pref;
-            echo "Pin-Priority: 900" >> /etc/apt/preferences.d/jessie.pref;
-            echo "deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi" >> /etc/apt/preferences.d/jessie.list;
+            sudo touch /etc/apt/preferences.d/jessie.pref;
+            sudo touch /etc/apt/sources.list.d/jessie.list;
+            sudo bash -c "echo 'Package: *' >> /etc/apt/preferences.d/jessie.pref";
+            sudo bash -c "echo Pin: release n=jessie >> /etc/apt/preferences.d/jessie.pref";
+            sudo bash -c "echo Pin-Priority: 900 >> /etc/apt/preferences.d/jessie.pref";
+            echo "pref listo"
+            sudo bash -c "echo deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi >> /etc/apt/sources.list.d/jessie.list";  
+            #sudo sed -i '$ a Package: *' /etc/apt/preferences.d/jessie.pref;
+            #sudo sed -i '$ a Pin: release n=jessie' /etc/apt/preferences.d/jessie.pref;
+            #sudo sed -i '$ a Pin-Priority: 900 ' /etc/apt/preferences.d/jessie.pref;
+            #sudo sed -i '$ a deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi' /etc/apt/sources.list.d/jessie.list;
             echo "Actualizando repos";
             sudo apt-get update;
             echo "Instalando packs";
             sudo apt-get install systemd -t jessie -y;
             sudo apt-get install systemd -y;
+            echo "Limpiando Archivos y repo";
+            sudo rm /etc/apt/preferences.d/jessie.pref;
+            sudo rm /etc/apt/sources.list.d/jessie.list;
+            sudo apt-get update;
+            clear
+            echo " 1) Migracion Tunel" 
+            echo " 2) Instalar APP Uxmal v2" 
+            echo " 3) Todo Junto" 
+            echo " 4) Actualizar" 
+            echo " 5) Instalar systemd"
+            echo " 6) Salir"
     ;;
 
     $(( ${#options[@]}+1 )) ) echo "ALV Goodbye!"; break;;
