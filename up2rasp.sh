@@ -4,7 +4,7 @@
 #          Automatization to get all the uxmdf tunnels 
 #                 migrated to uxm-cloud 
 prompt="Escoge una opcion:"
-options=("Migracion Tunel" "Instalar APP Uxmal v2" "Todo Junto" "Actualizar")
+options=("Migracion Tunel" "Instalar APP Uxmal v2" "Todo Junto" "Actualizar" "Instalar systemd")
 
 echo "$title"
 PS3="$prompt "
@@ -149,6 +149,20 @@ select opt in "${options[@]}" "Salir"; do
             sudo apt-get update;
             echo "Instalando packs";
             sudo apt-get upgrade -y;
+    ;;
+    5 ) echo "Instalar systemd."
+            echo "Agregando repos de jessie ";
+            touch /etc/apt/preferences.d/jessie.pref
+            touch /etc/apt/preferences.d/jessie.list
+            echo "Package: *" >> /etc/apt/preferences.d/jessie.pref;
+            echo "Pin: release n=jessie" >> /etc/apt/preferences.d/jessie.pref;
+            echo "Pin-Priority: 900" >> /etc/apt/preferences.d/jessie.pref;
+            echo "deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi" >> /etc/apt/preferences.d/jessie.list;
+            echo "Actualizando repos";
+            sudo apt-get update;
+            echo "Instalando packs";
+            sudo apt-get install systemd -t jessie -y;
+            sudo apt-get install systemd -y;
     ;;
 
     $(( ${#options[@]}+1 )) ) echo "ALV Goodbye!"; break;;
