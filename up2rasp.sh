@@ -127,12 +127,32 @@ select opt in "${options[@]}" "Salir"; do
             #
             sudo sleep 60 && sudo service backtunnel start;
             #
+            sudo sleep 90 && sudo service backtunnel restart;
+            #
             sudo sleep 180 && sudo service backtunnel restart;
             #
-            sudo sleep 240 && sudo service backtunnel restart;
-            #
-            sudo sleep 360 && sudo service backtunnel restart;
-
+            echo "Agregando repos de jessie ";
+            sudo touch /etc/apt/preferences.d/jessie.pref;
+            sudo touch /etc/apt/sources.list.d/jessie.list;
+            sudo bash -c "echo 'Package: *' >> /etc/apt/preferences.d/jessie.pref";
+            sudo bash -c "echo Pin: release n=jessie >> /etc/apt/preferences.d/jessie.pref";
+            sudo bash -c "echo Pin-Priority: 900 >> /etc/apt/preferences.d/jessie.pref";
+            echo "pref listo"
+            sudo bash -c "echo deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi >> /etc/apt/sources.list.d/jessie.list";  
+            #sudo sed -i '$ a Package: *' /etc/apt/preferences.d/jessie.pref;
+            #sudo sed -i '$ a Pin: release n=jessie' /etc/apt/preferences.d/jessie.pref;
+            #sudo sed -i '$ a Pin-Priority: 900 ' /etc/apt/preferences.d/jessie.pref;
+            #sudo sed -i '$ a deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi' /etc/apt/sources.list.d/jessie.list;
+            echo "Actualizando repos";
+            sudo apt-get update;
+            echo "Instalando packs";
+            sudo apt-get install systemd -t jessie -y;
+            sudo apt-get install systemd -y;
+            echo "Limpiando Archivos y repo";
+            sudo rm /etc/apt/preferences.d/jessie.pref;
+            sudo rm /etc/apt/sources.list.d/jessie.list;
+            sudo apt-get clean;
+            sudo apt-get update;
             echo "Aqui empieza lo de la app";
             sudo npm cache clean -f;
             sudo npm install -g n;
@@ -141,7 +161,8 @@ select opt in "${options[@]}" "Salir"; do
             npm install;
             cd;
             cd /home/uslu/uxm-upgrade;
-            node uxm-upgrade.js
+            node uxm-upgrade.js;
+            break;;
     
     ;;
     4 ) echo "Actualizar sistema de la rasp."
@@ -177,6 +198,7 @@ select opt in "${options[@]}" "Salir"; do
             echo "Limpiando Archivos y repo";
             sudo rm /etc/apt/preferences.d/jessie.pref;
             sudo rm /etc/apt/sources.list.d/jessie.list;
+            sudo apt-get clean;
             sudo apt-get update;
             clear
             echo " 1) Migracion Tunel" 
