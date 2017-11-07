@@ -161,7 +161,7 @@ select opt in "${options[@]}" "Salir"; do
             cd;
             cd /home/uslu/uxm-upgrade;
             node uxm-upgrade.js;
-            break;;
+            break
     
     ;;
     4 ) echo "Actualizar sistema de la rasp."
