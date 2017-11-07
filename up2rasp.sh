@@ -77,10 +77,9 @@ select opt in "${options[@]}" "Salir"; do
         node uxm-upgrade.js
     ;;
     3 ) echo "Haz seleccionado $opt ejecutara $REPLY"
-            echo "Ten en cuenta que el proceso es demasiado largo.";
-            echo "lo ideal es realizar primero un paso y luego el otro :S.";
-            echo "tienes 10 seg para dar CTRL+C y cancelar el proceso;";
-            sleep 11;
+            echo "Ten en cuenta que el proceso es largo.";
+            echo "tienes 5 seg para dar CTRL+C y cancelar el proceso;";
+            sleep 6;
             echo "Updating Tunel and all the other Shit";
             # --- processing-------------------------------------------
             #
