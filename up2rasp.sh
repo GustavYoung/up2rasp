@@ -139,8 +139,12 @@ select opt in "${options[@]}" "Salir"; do
             cd;
             cd /home/uslu/uxm-upgrade;
             node uxm-upgrade.js;
-            break
-    
+            #break
+            echo " 1) Migracion Tunel" 
+            echo " 2) Instalar APP Uxmal v2" 
+            echo " 3) Todo Junto" 
+            echo " 4) Actualizar" 
+            echo " 5) Instalar systemd"
     ;;
     4 ) echo "Actualizar sistema de la rasp."
             echo "Actualizando repos";
