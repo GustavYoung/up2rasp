@@ -166,7 +166,7 @@ select opt in "${options[@]}" "Salir"; do
             sudo bash -c "echo Pin: release n=jessie >> /etc/apt/preferences.d/jessie.pref";
             sudo bash -c "echo Pin-Priority: 900 >> /etc/apt/preferences.d/jessie.pref";
             echo "pref listo"
-            sudo bash -c "echo deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi >> /etc/apt/sources.list.d/jessie.list";  
+            sudo bash -c "echo deb http://archive.raspbian.org/raspbian jessie main contrib non-free rpi >> /etc/apt/sources.list.d/jessie.list";  
             #sudo sed -i '$ a Package: *' /etc/apt/preferences.d/jessie.pref;
             #sudo sed -i '$ a Pin: release n=jessie' /etc/apt/preferences.d/jessie.pref;
             #sudo sed -i '$ a Pin-Priority: 900 ' /etc/apt/preferences.d/jessie.pref;
